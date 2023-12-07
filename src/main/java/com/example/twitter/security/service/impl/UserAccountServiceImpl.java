@@ -3,7 +3,11 @@ package com.example.twitter.security.service.impl;
 import com.example.twitter.security.model.UserAccount;
 import com.example.twitter.security.repository.UserAccountRepository;
 import com.example.twitter.security.service.UserAccountService;
+import jakarta.transaction.Transactional;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 
@@ -23,5 +27,10 @@ public class UserAccountServiceImpl implements UserAccountService {
         }
 
         this.userAccountRepository.save(userAccount);
+    }
+
+    @Override
+    public Optional<UserAccount> findByUsername(String username) {
+        return userAccountRepository.findByUsername(username);
     }
 }
