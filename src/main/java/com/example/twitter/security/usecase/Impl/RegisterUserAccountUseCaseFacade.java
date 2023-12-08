@@ -1,10 +1,10 @@
-package com.example.twitter.usecase.Impl;
+package com.example.twitter.security.usecase.Impl;
 
-import com.example.twitter.mapper.RegisterRequestToUserAccountMapper;
+import com.example.twitter.security.mapper.RegisterRequestToUserAccountMapper;
 import com.example.twitter.security.model.UserAccount;
 import com.example.twitter.security.service.UserAccountService;
 import com.example.twitter.security.web.model.RegisterRequest;
-import com.example.twitter.usecase.RegisterUserAccountUseCase;
+import com.example.twitter.security.usecase.RegisterUserAccountUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

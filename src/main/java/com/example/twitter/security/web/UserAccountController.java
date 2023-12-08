@@ -1,21 +1,12 @@
 package com.example.twitter.security.web;
 
-import com.example.twitter.mapper.RegisterRequestToUserAccountMapper;
-import com.example.twitter.security.model.UserAccount;
-import com.example.twitter.security.model.UserRole;
-import com.example.twitter.security.service.UserAccountService;
-import com.example.twitter.security.service.UserRoleService;
 import com.example.twitter.security.web.model.RegisterRequest;
-import com.example.twitter.usecase.RegisterUserAccountUseCase;
+import com.example.twitter.security.usecase.RegisterUserAccountUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Locale;
-import java.util.Set;
 
 @Slf4j
 @RestController

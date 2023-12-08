@@ -1,6 +1,6 @@
-package com.example.twitter.mapper.impl;
+package com.example.twitter.security.mapper.impl;
 
-import com.example.twitter.mapper.UserAccountToUserMapper;
+import com.example.twitter.security.mapper.UserAccountToUserMapper;
 import com.example.twitter.security.model.UserAccount;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;

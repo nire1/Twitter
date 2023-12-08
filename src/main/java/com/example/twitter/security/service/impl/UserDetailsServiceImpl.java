@@ -1,10 +1,8 @@
 package com.example.twitter.security.service.impl;
 
-import com.example.twitter.mapper.UserAccountToUserMapper;
+import com.example.twitter.security.mapper.UserAccountToUserMapper;
 import com.example.twitter.security.service.UserAccountService;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

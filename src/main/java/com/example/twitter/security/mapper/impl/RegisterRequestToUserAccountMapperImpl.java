@@ -1,6 +1,6 @@
-package com.example.twitter.mapper.impl;
+package com.example.twitter.security.mapper.impl;
 
-import com.example.twitter.mapper.RegisterRequestToUserAccountMapper;
+import com.example.twitter.security.mapper.RegisterRequestToUserAccountMapper;
 import com.example.twitter.security.model.UserAccount;
 import com.example.twitter.security.model.UserRole;
 import com.example.twitter.security.service.UserRoleService;

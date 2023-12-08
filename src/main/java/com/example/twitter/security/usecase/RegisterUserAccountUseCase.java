@@ -1,4 +1,4 @@
-package com.example.twitter.usecase;
+package com.example.twitter.security.usecase;
 
 import com.example.twitter.security.web.model.RegisterRequest;
 
