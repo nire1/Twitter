@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface UserProfileService {
     void createUserProfile(UserProfile userProfile);
-    Optional<UserProfile> findUserProfileById(long id);
+    UserProfile findUserProfileByRequired(long id);
 }

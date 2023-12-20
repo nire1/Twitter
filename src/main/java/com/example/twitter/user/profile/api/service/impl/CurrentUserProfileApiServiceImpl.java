@@ -24,13 +24,8 @@ public class CurrentUserProfileApiServiceImpl implements CurrentUserProfileApiSe
                 .orElseThrow(() -> new RuntimeException("Пользователь должен быть авторизован в системе"));
 
         return userProfileService
-                .findUserProfileById(currentUserApiModel.userAccountId())
-                .orElseThrow(() -> {
-                    String errorMessage = String.format("Профиль пользователя с id = %d в системе не существует",
-                            currentUserApiModel.userAccountId()
-                    );
-                    return new RuntimeException(errorMessage);
-                });
+                .findUserProfileByRequired(currentUserApiModel.userAccountId())
+                ;
 
     }
 }
