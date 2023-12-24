@@ -1,4 +1,4 @@
-package com.example.twitter.security.mapper;
+package com.example.twitter.common.mapper;
 
 public interface Mapper<D, S> {
     D map(S source);

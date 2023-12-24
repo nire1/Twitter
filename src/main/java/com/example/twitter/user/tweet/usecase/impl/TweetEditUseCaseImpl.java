@@ -1,8 +1,8 @@
 package com.example.twitter.user.tweet.usecase.impl;
 
+import com.example.twitter.common.exception.TwitterException;
 import com.example.twitter.user.profile.api.service.CurrentUserProfileApiService;
 import com.example.twitter.user.profile.model.UserProfile;
-import com.example.twitter.user.tweet.mapper.TweetAddRequestToTweetMapper;
 import com.example.twitter.user.tweet.mapper.TweetEditRequestToTweetMapper;
 import com.example.twitter.user.tweet.mapper.TweetToTweetResponseMapper;
 import com.example.twitter.user.tweet.model.Tweet;
@@ -37,7 +37,7 @@ public class TweetEditUseCaseImpl implements TweetEditUseCase {
                 .map(Tweet::getUserProfile)
                 .orElseThrow(() -> {
                     String errorMessage = String.format("Твит с id = %d не существует", editRequest.id());
-                    return new RuntimeException(errorMessage);
+                    return new TwitterException(errorMessage);
                 });
 
         if(!actor.equals(owner)){
@@ -45,7 +45,7 @@ public class TweetEditUseCaseImpl implements TweetEditUseCase {
                     editRequest.id(),
                     actor.getNickname()
             );
-            throw new RuntimeException(errorMessage);
+            throw new TwitterException(errorMessage);
         }
         Tweet tweet = tweetEditRequestToTweetMapper.map(editRequest);
         Tweet updatedTweet = tweetService.updateTweet(tweet);

@@ -1,5 +1,6 @@
 package com.example.twitter.security.service.impl;
 
+import com.example.twitter.common.exception.TwitterException;
 import com.example.twitter.security.service.AccessTokenService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,7 +29,7 @@ public class JwtAccessTokenService implements AccessTokenService {
                 .of(authentication.getPrincipal())
                 .filter(UserDetails.class::isInstance)
                 .map(UserDetails.class::cast)
-                .orElseThrow(()-> new RuntimeException("Не удалось сформировать объект UserDetails из объекта Authentication"));
+                .orElseThrow(()-> new TwitterException("Не удалось сформировать объект UserDetails из объекта Authentication"));
 
         Instant issuedAt = Instant.now();
         Instant expiresAt = issuedAt.plus(1, ChronoUnit.DAYS);

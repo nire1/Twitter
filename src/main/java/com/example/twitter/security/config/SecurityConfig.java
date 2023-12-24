@@ -6,9 +6,9 @@ import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 
-import java.security.KeyPair;
+
 import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
+
 import java.util.UUID;
 
 import lombok.SneakyThrows;
@@ -57,9 +57,8 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .oauth2ResourceServer((oauth2ResourceServer) ->
                 oauth2ResourceServer
-                        .jwt((jwt) ->
-                                jwt
-                                        .decoder(jwtDecoder())
+                        .jwt(jwt ->
+                                jwt.decoder(jwtDecoder())
                         )
         );
 
@@ -99,7 +98,7 @@ public class SecurityConfig {
     @Bean
     public JWKSource<SecurityContext> jwkSource() {
 
-        RSAPublicKey publicKey = rsaKeys.rsaPublicKey();
+
         RSAPrivateKey privateKey = rsaKeys.rsaPrivateKey();
         RSAKey rsaKey = new RSAKey.Builder(rsaKeys.rsaPublicKey())
                 .privateKey(privateKey)

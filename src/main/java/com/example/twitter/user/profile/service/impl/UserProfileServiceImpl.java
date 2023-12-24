@@ -1,13 +1,11 @@
 package com.example.twitter.user.profile.service.impl;
 
-import com.example.twitter.security.repository.UserAccountRepository;
+import com.example.twitter.common.exception.TwitterException;
 import com.example.twitter.user.profile.model.UserProfile;
 import com.example.twitter.user.profile.repository.UserProfileRepository;
 import com.example.twitter.user.profile.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +21,7 @@ public class UserProfileServiceImpl implements UserProfileService {
                             "Профиль пользователя с Id = %d ранее уже был создан",
                             userProfile.getId()
                     );
-            throw new RuntimeException(errorMessage);
+            throw new TwitterException(errorMessage);
         }
         if(userProfileRepository.existsByNickname(userProfile.getNickname())){
             String errorMessage = String
@@ -31,7 +29,7 @@ public class UserProfileServiceImpl implements UserProfileService {
                             "Профиль пользователя с Id = %s ранее уже был создан",
                             userProfile.getNickname()
                     );
-            throw new RuntimeException(errorMessage);
+            throw new TwitterException(errorMessage);
         }
 
         userProfileRepository.save(userProfile);
@@ -43,7 +41,7 @@ public class UserProfileServiceImpl implements UserProfileService {
             String errorMessage = String.format("Профиль пользователя с id = %d в системе не существует",
                     id
             );
-            return new RuntimeException(errorMessage);
+            return new TwitterException(errorMessage);
         });
     }
 }

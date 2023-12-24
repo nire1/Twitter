@@ -1,5 +1,6 @@
 package com.example.twitter.security.mapper.impl;
 
+import com.example.twitter.common.exception.TwitterException;
 import com.example.twitter.security.mapper.RegisterRequestToUserAccountMapper;
 import com.example.twitter.security.model.UserAccount;
 import com.example.twitter.security.model.UserRole;
@@ -21,7 +22,7 @@ public class RegisterRequestToUserAccountMapperImpl implements RegisterRequestTo
 
         UserRole userRole = this.userRoleService
                 .findUserRole()
-                .orElseThrow(() -> new RuntimeException("User role not found"));
+                .orElseThrow(() -> new TwitterException("User role not found"));
 
         UserAccount userAccount = new UserAccount();
         userAccount.setUsername(registerRequest.username().toLowerCase(Locale.ROOT));

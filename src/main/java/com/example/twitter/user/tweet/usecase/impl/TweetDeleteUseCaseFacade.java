@@ -1,5 +1,6 @@
 package com.example.twitter.user.tweet.usecase.impl;
 
+import com.example.twitter.common.exception.TwitterException;
 import com.example.twitter.user.profile.api.service.CurrentUserProfileApiService;
 import com.example.twitter.user.profile.model.UserProfile;
 import com.example.twitter.user.tweet.model.Tweet;
@@ -26,14 +27,14 @@ public class TweetDeleteUseCaseFacade implements TweetDeleteUseCase {
                 .map(Tweet::getUserProfile)
                 .orElseThrow(() -> {
                     String errorMessage = String.format("Твит с id = %d не существует",tweetId);
-                    return new RuntimeException(errorMessage);
+                    return new TwitterException(errorMessage);
                 });
         if(!actor.equals(owner)){
             String errorMessage = String.format("Удаление твита с id = %d запрещено. Пользователь %s не является его владельцем",
                     tweetId,
                     actor.getNickname()
             );
-            throw new RuntimeException(errorMessage);
+            throw new TwitterException(errorMessage);
         }
         tweetService.deleteTweet(tweetId);
     }

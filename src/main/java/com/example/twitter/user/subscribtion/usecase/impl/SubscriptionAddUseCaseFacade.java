@@ -1,5 +1,6 @@
 package com.example.twitter.user.subscribtion.usecase.impl;
 
+import com.example.twitter.common.exception.TwitterException;
 import com.example.twitter.user.profile.model.UserProfile;
 import com.example.twitter.user.subscribtion.mapper.SubscribeRequestToSubscriptionMapper;
 import com.example.twitter.user.subscribtion.model.Subscription;
@@ -21,11 +22,10 @@ public class SubscriptionAddUseCaseFacade implements SubscriptionAddUseCase {
     @Override
     public void subscribe(SubscribeRequest subscribeRequest) {
         Subscription subscription = subscriptionMapper.map(subscribeRequest);
-        UserProfile follower = subscription.getFollower();
         UserProfile followed = subscription.getFollowed();
 
         if (subscription.getFollower().equals(subscription.getFollowed())){
-            throw  new RuntimeException("Вы не можете подписаться сами на себя");
+            throw  new TwitterException("Вы не можете подписаться сами на себя");
         }
 
         if(subscriptionService.existSubscription(subscription)){
@@ -33,7 +33,7 @@ public class SubscriptionAddUseCaseFacade implements SubscriptionAddUseCase {
                     "Вы уже подписаны на %s",
                     followed.getNickname()
             );
-            throw new RuntimeException(errorMessage);
+            throw new TwitterException(errorMessage);
         }
         subscriptionService.createSubscription(subscription);
 

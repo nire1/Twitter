@@ -1,10 +1,9 @@
 package com.example.twitter.security.service.impl;
 
+import com.example.twitter.common.exception.TwitterException;
 import com.example.twitter.security.model.UserAccount;
 import com.example.twitter.security.repository.UserAccountRepository;
 import com.example.twitter.security.service.UserAccountService;
-import jakarta.transaction.Transactional;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -23,7 +22,7 @@ public class UserAccountServiceImpl implements UserAccountService {
         boolean isUsernameExists= userAccountRepository.existsByUsername(userAccount.getUsername());
 
         if(isUsernameExists){
-            throw new RuntimeException("Account with this username already exists");
+            throw new TwitterException("Account with this username already exists");
         }
 
         this.userAccountRepository.save(userAccount);

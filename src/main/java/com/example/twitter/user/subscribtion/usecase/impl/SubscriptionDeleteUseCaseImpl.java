@@ -1,5 +1,6 @@
 package com.example.twitter.user.subscribtion.usecase.impl;
 
+import com.example.twitter.common.exception.TwitterException;
 import com.example.twitter.user.profile.model.UserProfile;
 import com.example.twitter.user.subscribtion.mapper.UnsubscribeRequestToSubscriptionMapper;
 import com.example.twitter.user.subscribtion.model.Subscription;
@@ -19,14 +20,14 @@ public class SubscriptionDeleteUseCaseImpl implements SubscriptionDeleteUseCase 
     }
 
     @Override
-    public void unsubscribe(UnsubscribeRequest unsubscribeRequest) {
+    public void unsubscribe(UnsubscribeRequest unsubscribeRequest) throws TwitterException {
         Subscription subscription = unsubscribeRequestToSubscriptionMapper.map(unsubscribeRequest);
 
         UserProfile follower = subscription.getFollower();
         UserProfile followed = subscription.getFollowed();
 
         if(follower.equals(followed)){
-            throw new RuntimeException("Отписка от самого себя не имеет смысла");
+            throw new TwitterException("Отписка от самого себя не имеет смысла");
 
         }
 
@@ -35,7 +36,7 @@ public class SubscriptionDeleteUseCaseImpl implements SubscriptionDeleteUseCase 
                     "Вы не были подписаны на %s",
                     followed.getNickname()
             );
-            throw new RuntimeException(errorMessage);
+            throw new TwitterException(errorMessage);
         }
         subscriptionService.deleteSubscription(subscription);
 
