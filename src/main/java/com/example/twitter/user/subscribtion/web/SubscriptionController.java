@@ -3,10 +3,7 @@ package com.example.twitter.user.subscribtion.web;
 import com.example.twitter.user.subscribtion.usecase.SubscriptionAddUseCase;
 import com.example.twitter.user.subscribtion.usecase.SubscriptionDeleteUseCase;
 import com.example.twitter.user.subscribtion.usecase.SubscriptionFindFollowersUseCase;
-import com.example.twitter.user.subscribtion.web.model.FollowerFindRequest;
-import com.example.twitter.user.subscribtion.web.model.FollowerResponse;
-import com.example.twitter.user.subscribtion.web.model.SubscribeRequest;
-import com.example.twitter.user.subscribtion.web.model.UnsubscribeRequest;
+import com.example.twitter.user.subscribtion.web.model.*;
 import jakarta.validation.Valid;
 import jakarta.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +34,7 @@ public class SubscriptionController {
     }
 
     @GetMapping("/followers")
-    public Collection<FollowerResponse> allFollowers(@PathParam("page") int page, @PathParam("limit") int limit){
+    public FollowerPageResponse allFollowers(@PathParam("page") int page, @PathParam("limit") int limit){
 
         FollowerFindRequest findRequest = new FollowerFindRequest(page,limit);
         return subscriptionFindFollowersUseCase.findFollowers(findRequest);

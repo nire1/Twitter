@@ -2,11 +2,12 @@ package com.example.twitter.user.subscribtion.usecase.impl;
 
 import com.example.twitter.user.profile.api.service.CurrentUserProfileApiService;
 import com.example.twitter.user.profile.model.UserProfile;
-import com.example.twitter.user.subscribtion.model.Subscription;
+import com.example.twitter.user.subscribtion.model.FollowerSubscription;
 import com.example.twitter.user.subscribtion.model.Subscription_;
 import com.example.twitter.user.subscribtion.service.SubscriptionService;
 import com.example.twitter.user.subscribtion.usecase.SubscriptionFindFollowersUseCase;
 import com.example.twitter.user.subscribtion.web.model.FollowerFindRequest;
+import com.example.twitter.user.subscribtion.web.model.FollowerPageResponse;
 import com.example.twitter.user.subscribtion.web.model.FollowerResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
+import java.util.List;
+
 @Component
 public class SubscriptionFindFollowersUseCaseFacade implements SubscriptionFindFollowersUseCase {
     private final CurrentUserProfileApiService currentUserProfileApiService;
@@ -26,7 +28,7 @@ public class SubscriptionFindFollowersUseCaseFacade implements SubscriptionFindF
     }
 
     @Override
-    public Collection<FollowerResponse> findFollowers(FollowerFindRequest findRequest) {
+    public FollowerPageResponse findFollowers(FollowerFindRequest findRequest) {
         UserProfile author = currentUserProfileApiService.currentUserProfile();
 
         Pageable pageable = PageRequest
@@ -39,9 +41,9 @@ public class SubscriptionFindFollowersUseCaseFacade implements SubscriptionFindF
                         )
                 );
 
-        Page<Subscription> subscriptions = subscriptionService.findAllFollowerSubscriptions(author,pageable);
+        Page<FollowerSubscription> subscriptions = subscriptionService.findAllFollowerSubscriptions(author,pageable);
 
-        return subscriptions.stream().map(item ->
+        List<FollowerResponse> followers = subscriptions.stream().map(item ->
                 new FollowerResponse(
                         item.getId(),
                         item.getFollower().getId(),
@@ -50,5 +52,11 @@ public class SubscriptionFindFollowersUseCaseFacade implements SubscriptionFindF
                         item.getCreatedTimestamp()
                 )
         ).toList();
+    return new FollowerPageResponse(
+            subscriptions.getTotalElements(),
+            subscriptions.isFirst(),
+            subscriptions.isLast(),
+            followers
+    );
     }
 }

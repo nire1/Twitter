@@ -1,6 +1,7 @@
 package com.example.twitter.user.subscribtion.service.impl;
 
 import com.example.twitter.user.profile.model.UserProfile;
+import com.example.twitter.user.subscribtion.model.FollowerSubscription;
 import com.example.twitter.user.subscribtion.model.Subscription;
 import com.example.twitter.user.subscribtion.repository.SubscriptionRepository;
 import com.example.twitter.user.subscribtion.service.SubscriptionService;
@@ -44,7 +45,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public Page<Subscription> findAllFollowerSubscriptions(UserProfile author, Pageable pageable) {
+    public Page<FollowerSubscription> findAllFollowerSubscriptions(UserProfile author, Pageable pageable) {
         return subscriptionRepository.findAllByFollowed(author,pageable);
     }
 
