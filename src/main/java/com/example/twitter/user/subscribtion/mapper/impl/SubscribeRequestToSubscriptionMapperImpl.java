@@ -3,7 +3,6 @@ package com.example.twitter.user.subscribtion.mapper.impl;
 import com.example.twitter.user.profile.api.service.CurrentUserProfileApiService;
 import com.example.twitter.user.profile.api.service.UserProfileApiService;
 import com.example.twitter.user.profile.model.UserProfile;
-import com.example.twitter.user.profile.service.UserProfileService;
 import com.example.twitter.user.subscribtion.mapper.SubscribeRequestToSubscriptionMapper;
 import com.example.twitter.user.subscribtion.model.Subscription;
 import com.example.twitter.user.subscribtion.web.model.SubscribeRequest;

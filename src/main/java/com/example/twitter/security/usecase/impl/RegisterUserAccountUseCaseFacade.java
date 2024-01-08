@@ -1,4 +1,4 @@
-package com.example.twitter.security.usecase.Impl;
+package com.example.twitter.security.usecase.impl;
 
 import com.example.twitter.security.mapper.RegisterRequestToUserAccountMapper;
 import com.example.twitter.security.model.UserAccount;

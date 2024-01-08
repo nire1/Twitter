@@ -1,4 +1,4 @@
-package com.example.twitter.security.usecase.Impl;
+package com.example.twitter.security.usecase.impl;
 
 import com.example.twitter.security.service.AccessTokenService;
 import com.example.twitter.security.usecase.AuthenticationUseCase;
