@@ -4,7 +4,11 @@ import com.example.twitter.user.profile.model.UserProfile;
 import com.example.twitter.user.subscribtion.model.Subscription;
 import com.example.twitter.user.subscribtion.repository.SubscriptionRepository;
 import com.example.twitter.user.subscribtion.service.SubscriptionService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Collection;
 
 @Service
 public class SubscriptionServiceImpl implements SubscriptionService {
@@ -38,4 +42,12 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         subscriptionRepository.save(subscription);
 
     }
+
+    @Override
+    public Page<Subscription> findAllFollowerSubscriptions(UserProfile author, Pageable pageable) {
+        return subscriptionRepository.findAllByFollowed(author,pageable);
+    }
+
+
 }
+
