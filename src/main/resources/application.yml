@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/twitter_db
+    url: jdbc:postgresql://localhost:5432/twitter_db5
     username: postgres
     password: 131270
     driverClassName: org.postgresql.Driver
